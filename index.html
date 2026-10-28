@@ -58,7 +58,7 @@ section { margin-bottom: 2rem; }
   min-height: 56px; padding: .55rem 0; border-bottom: 1px solid var(--line);
 }
 .tape .sym { font-weight: 700; font-size: 1.05rem; }
-.tape .sym a, .items .h a, .items .src a, .cal a { display: inline-flex; align-items: center; min-height: 44px; }
+.tape .sym a, .items .h a, .items .src a, .items a.src, #repo a, .cal a { display: inline-flex; align-items: center; min-height: 44px; }
 .tape .sym a { text-decoration: none; }
 .tape .sym a:hover { text-decoration: underline; }
 .tape .name { color: var(--muted); font-size: .85rem; margin: 0; }
@@ -181,94 +181,114 @@ const WATCHLIST = {
 };
 
 const BRIEF = {
-  mode: "sample",
-  asOf: "2026-10-16",
-  retrievedAt: "2026-10-16T16:30:00-04:00",
-  priceType: "close",
+  mode: "live",
+  asOf: "2026-10-28",
+  retrievedAt: "2026-10-28T10:30:00-04:00",
+  priceType: "intraday",
   companies: {
     NVDA: {
       closes: [
-        { date: "2026-10-12", close: 100.00 },
-        { date: "2026-10-13", close: 101.40 },
-        { date: "2026-10-14", close: 99.80 },
-        { date: "2026-10-15", close: 103.10 },
-        { date: "2026-10-16", close: 104.20 }
+        { date: "2026-10-21", close: 221.97 },
+        { date: "2026-10-22", close: 212.21 },
+        { date: "2026-10-23", close: 210.96 },
+        { date: "2026-10-26", close: 216.00 },
+        { date: "2026-10-27", close: 217.94 }
       ],
-      latest: null,
-      priceSource: "https://example.com/sample",
+      latest: { date: "2026-10-28", time: "10:24 AM", price: 218.07 },
+      priceSource: "https://stockanalysis.com/stocks/nvda/history/",
       news: [
-        { date: "2026-10-15", headline: "Sample headline. Run the refresh-brief agent to replace this.", source: "Sample", url: "https://example.com/sample", why: "Sample. The agent writes one plain sentence here on why the item matters to the stock." }
+        { date: "2026-10-27", headline: "Nvidia to invest $3B in Meta's planned equity offering", source: "Stock Analysis", url: "https://stockanalysis.com/news/nvidia-3-billion-meta-offering/", why: "Nvidia is putting money into a big customer while expanding the amount of Nvidia infrastructure Meta will deploy." },
+        { date: "2026-10-28", headline: "OpenAI Turns to Google AI Chips to Diversify Beyond Nvidia", source: "TipRanks", url: "https://www.tipranks.com/news/openai-turns-to-google-ai-chips-to-diversify-beyond-nvidia", why: "A large Nvidia customer reportedly plans to buy a competing chip, though terms are not final and it would keep buying Nvidia GPUs." }
       ],
-      upcoming: [
-        { date: "2026-10-28", event: "Sample event (replace by refreshing)", source: "Sample", url: "https://example.com/sample" }
-      ]
+      upcoming: []
     },
     JPM: {
       closes: [
-        { date: "2026-10-12", close: 100.00 },
-        { date: "2026-10-13", close: 99.30 },
-        { date: "2026-10-14", close: 98.90 },
-        { date: "2026-10-15", close: 98.20 },
-        { date: "2026-10-16", close: 97.60 }
+        { date: "2026-10-21", close: 335.19 },
+        { date: "2026-10-22", close: 336.54 },
+        { date: "2026-10-23", close: 331.58 },
+        { date: "2026-10-26", close: 334.04 },
+        { date: "2026-10-27", close: 335.79 }
       ],
-      latest: null,
-      priceSource: "https://example.com/sample",
+      latest: { date: "2026-10-28", time: "10:21 AM", price: 337.75 },
+      priceSource: "https://stockanalysis.com/stocks/jpm/history/",
       news: [
-        { date: "2026-10-14", headline: "Sample headline. Run the refresh-brief agent to replace this.", source: "Sample", url: "https://example.com/sample", why: "Sample." }
+        { date: "2026-10-22", headline: "J.P. Morgan Asset Management Expands Access to Its Tokenized Money Market Funds on Solana", source: "PR Newswire", url: "https://www.prnewswire.com/news-releases/jp-morgan-asset-management-expands-access-to-its-tokenized-money-market-funds-on-solana-302917188.html", why: "Shows the bank pushing its tokenized cash products onto more blockchains, a small but visible digital-assets step." }
       ],
-      upcoming: []
+      upcoming: [
+        { date: "2026-10-28", event: "Market-wide: FOMC meeting ends (Oct 27-28); rate decision due this afternoon (the Fed page lists the meeting dates but does not state the decision day)", source: "Federal Reserve", url: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" }
+      ]
     },
     ACN: {
       closes: [
-        { date: "2026-10-12", close: 100.00 },
-        { date: "2026-10-13", close: 100.20 },
-        { date: "2026-10-14", close: 99.90 },
-        { date: "2026-10-15", close: 100.10 },
-        { date: "2026-10-16", close: 100.05 }
+        { date: "2026-10-21", close: 240.26 },
+        { date: "2026-10-22", close: 258.74 },
+        { date: "2026-10-23", close: 249.37 },
+        { date: "2026-10-26", close: 247.23 },
+        { date: "2026-10-27", close: 235.16 }
       ],
-      latest: null,
-      priceSource: "https://example.com/sample",
-      news: [],
-      upcoming: [
-        { date: "2026-10-22", event: "Sample event (replace by refreshing)", source: "Sample", url: "https://example.com/sample" }
-      ]
-    },
-    DE: {
-      closes: [
-        { date: "2026-10-12", close: 100.00 },
-        { date: "2026-10-13", close: 102.50 },
-        { date: "2026-10-14", close: 101.80 },
-        { date: "2026-10-15", close: 103.90 },
-        { date: "2026-10-16", close: 102.70 }
-      ],
-      latest: null,
-      priceSource: "https://example.com/sample",
+      latest: { date: "2026-10-28", time: "10:24 AM", price: 245.25 },
+      priceSource: "https://stockanalysis.com/stocks/acn/history/",
       news: [
-        { date: "2026-10-13", headline: "Sample headline. Run the refresh-brief agent to replace this.", source: "Sample", url: "https://example.com/sample", why: "Sample." }
+        { date: "2026-10-27", headline: "Accenture awarded $151.46M Air Force task order", source: "TipRanks (TheFly)", url: "https://www.tipranks.com/news/the-fly/accenture-awarded-151-46m-air-force-task-order-thefly-news", why: "A sole-source federal award with room for more work shows steady demand in Accenture's government business." },
+        { date: "2026-10-21", headline: "Accenture downgraded to Neutral from Outperform at Baird", source: "TipRanks (TheFly)", url: "https://www.tipranks.com/news/the-fly/accenture-downgraded-to-neutral-from-outperform-at-baird-thefly-news", why: "Baird says the stock has more than doubled since June and now looks fairly valued." }
       ],
       upcoming: []
     },
+    AME: {
+      closes: [
+        { date: "2026-10-21", close: 250.28 },
+        { date: "2026-10-22", close: 238.82 },
+        { date: "2026-10-23", close: 240.03 },
+        { date: "2026-10-26", close: 242.81 },
+        { date: "2026-10-27", close: 246.22 }
+      ],
+      latest: { date: "2026-10-28", time: "10:23 AM", price: 248.58 },
+      priceSource: "https://stockanalysis.com/stocks/ame/history/",
+      news: [],
+      upcoming: [
+        { date: "2026-11-03", event: "Q3 2026 earnings release before the market opens; webcast call at 8:30 AM ET", source: "AMETEK via PR Newswire", url: "https://www.prnewswire.com/news-releases/ametek-announces-third-quarter-2026-earnings-call-and-webcasted-investor-conference-call-information-302908794.html" }
+      ]
+    },
     LLY: {
       closes: [
-        { date: "2026-10-12", close: 100.00 },
-        { date: "2026-10-13", close: 98.70 },
-        { date: "2026-10-14", close: 99.60 },
-        { date: "2026-10-15", close: 101.30 },
-        { date: "2026-10-16", close: 102.90 }
+        { date: "2026-10-21", close: 1270.75 },
+        { date: "2026-10-22", close: 1306.69 },
+        { date: "2026-10-23", close: 1273.46 },
+        { date: "2026-10-26", close: 1279.14 },
+        { date: "2026-10-27", close: 1281.91 }
       ],
-      latest: null,
-      priceSource: "https://example.com/sample",
+      latest: { date: "2026-10-28", time: "10:22 AM", price: 1289.57 },
+      priceSource: "https://stockanalysis.com/stocks/lly/history/",
       news: [
-        { date: "2026-10-16", headline: "Sample headline. Run the refresh-brief agent to replace this.", source: "Sample", url: "https://example.com/sample", why: "Sample." }
+        { date: "2026-10-28", headline: "Lilly's retatrutide beats Ozempic 2 mg on A1C and weight loss in head-to-head trial", source: "PR Newswire (Lilly)", url: "https://www.prnewswire.com/news-releases/lillys-retatrutide-delivered-greater-a1c-reduction-and-more-than-double-the-weight-loss-of-ozempics-highest-approved-dose-in-head-to-head-trial-302921328.html", why: "Phase 3 data show about 20% weight loss versus 9.4% for Ozempic, though more patients stopped retatrutide because of side effects." },
+        { date: "2026-10-27", headline: "Patrik Jonsson to retire after 36 years; Ilya Yuffa named president, Lilly Global Markets", source: "PR Newswire (Lilly)", url: "https://www.prnewswire.com/news-releases/patrik-jonsson-to-retire-after-36-years-ilya-yuffa-named-president-lilly-global-markets-302921191.html", why: "Lilly is merging its U.S. and international operations under one leader from January 1, 2027." },
+        { date: "2026-10-26", headline: "Eli Lilly price target raised to $1,450 from $1,385 at Bernstein", source: "TipRanks (TheFly)", url: "https://www.tipranks.com/news/the-fly/eli-lilly-price-target-raised-to-1450-from-1385-at-bernstein-thefly-news", why: "Bernstein expects modestly better-than-consensus third-quarter revenue, led by international Mounjaro sales." }
       ],
       upcoming: [
-        { date: "2026-10-30", event: "Sample event (replace by refreshing)", source: "Sample", url: "https://example.com/sample" }
+        { date: "2026-10-29", event: "Q3 2026 earnings release", source: "Stock Analysis", url: "https://stockanalysis.com/stocks/lly/" }
       ]
     }
   }
 };
 
 const CHANGELOG = [
+  {
+    date: "2026-10-28",
+    summary: [
+      "NVDA 221.97 to 218.07 (-1.8%) as Nvidia agreed to invest $3B in Meta's equity offering",
+      "JPM 335.19 to 337.75 (+0.8%) on tokenized money market funds coming to Solana (no major price-moving news)",
+      "ACN 240.26 to 245.25 (+2.1%) after a $151.46M Air Force task order and a Baird downgrade to Neutral",
+      "AME 250.28 to 248.58 (-0.7%), no major news (AME is new to the list this refresh)",
+      "LLY 1270.75 to 1289.57 (+1.5%) on Phase 3 retatrutide data versus Ozempic ahead of earnings",
+      "Removed the old sample DE entry, which is no longer in WATCHLIST. Sample data replaced with live data.",
+      "Calendar added: FOMC decision (Oct 28, under JPM), LLY Q3 earnings (Oct 29), AME Q3 earnings (Nov 3)",
+      "Missing: no JPM, NVDA or ACN company events found inside the next 14 days (NVDA earnings Nov 17 and ACN Dec 17 are outside the window)",
+      "Missing: no AME news dated within the last 7 days was found (newest item, Oct 15, is older)",
+      "Missing: JPM has one news item only. Reuters, Barron's, CNBC and Business Wire pages could not be opened, so items from them were not used."
+    ],
+    note: "Prices are intraday as of about 10:21-10:24 AM ET on Oct 28; the Oct 28 values are not closes and will move. The five closes are Oct 21 to Oct 27 from stockanalysis.com history pages (a secondary source). The FOMC decision day (Oct 28, 2:00 PM ET) came from search results; the Fed calendar page only lists the Oct 27-28 meeting. LLY's earnings date (Oct 29) comes from stockanalysis.com; a search result for Lilly's own notice agreed but that page could not be opened. The AME earnings date is confirmed by AMETEK's press release. Check the ACN Baird item date (Oct 21) sits at the edge of the seven-day window."
+  },
   {
     date: "2026-10-16",
     summary: [
